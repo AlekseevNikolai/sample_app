@@ -42,7 +42,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   # Use sqlite3 as the database for Active Record
-  
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :test do
@@ -55,10 +55,14 @@ group :test do
   gem 'mini_backtrace'
 end
 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'bootstrap-sass'
 gem 'rails-controller-testing'
 gem 'bcrypt'
-gem 'sqlite3', '~> 1.4'

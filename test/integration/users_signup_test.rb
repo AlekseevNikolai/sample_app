@@ -12,6 +12,17 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_template 'users/new'
   end
 
+  test "Passwords doesnt match" do
+    get signup_path
+    assert_no_difference 'User.count' do
+      post users_path, params: {user: { name: "user",
+                              email: "user@invalid.com",
+                              password: "foobar",
+                              password_confirmation: "barfoo" }}
+    end
+    assert_template 'users/new'
+  end
+
   test "valid signup information" do
     get signup_path
     assert_difference 'User.count', 1 do
@@ -20,6 +31,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                             password: "password",
                                             password_confirmation: "password" }}
       follow_redirect!
+      assert is_logged_in?
     end
       assert_template 'users/show'
   end

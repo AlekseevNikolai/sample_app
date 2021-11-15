@@ -10,7 +10,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    #debugger
     if @user.save
+      log_in @user
+      remember @user
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
     else
@@ -21,8 +24,7 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      #debugger
-      params.require(:user).permit(:name, :email, :password)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
   
 

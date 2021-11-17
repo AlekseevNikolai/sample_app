@@ -43,6 +43,7 @@ group :development do
   gem 'spring'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '~> 1.4'
+  gem 'faker'
 end
 
 group :test do
@@ -68,3 +69,6 @@ gem 'bcrypt'
 gem 'bootstrap-sass', '3.2.0.4'
 gem 'sprockets', '~> 3.7.2'
 gem 'jquery-rails'
+
+gem 'will_paginate', '3.3'
+gem 'will_paginate-bootstrap4'

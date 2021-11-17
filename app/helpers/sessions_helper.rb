@@ -15,10 +15,10 @@ module SessionsHelper
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
-      elsif (user_id = cookies.signed[:user_id])
-        #raise # Если тест выполнится успешно, значит, эта ветвь не охвачена тестированием.
-        user = User.find_by(id: user_id)
-        if user && user.authenticated?(cookies[:remember_token])
+    elsif (user_id = cookies.signed[:user_id])
+      #raise # Если тест выполнится успешно, значит, эта ветвь не охвачена тестированием.
+      user = User.find_by(id: user_id)
+      if user && user.authenticated?(cookies[:remember_token])
         log_in user
         @current_user = user
       end
@@ -44,4 +44,20 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
+  # Возвращает true, если данный пользователь является текущим.
+  def current_user?(user)
+    user == current_user
+  end
+
+
+  # Перенаправить по сохраненному адресу или на страницу по умолчанию.
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+  end
+
+  # Запоминает URL.
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
+  end
 end

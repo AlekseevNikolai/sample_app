@@ -72,3 +72,6 @@ gem 'jquery-rails'
 
 gem 'will_paginate', '3.3'
 gem 'will_paginate-bootstrap4'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'

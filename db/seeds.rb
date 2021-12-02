@@ -48,8 +48,16 @@ User.create!(name: "EtoEtna",
             activated: true,
             activated_at: Time.zone.now)
 
-  User.create!(name: "Kolechka",
+User.create!(name: "Kolechka",
             email: "Kolya@master.pro",
+            password: "HugeDick",
+            password_confirmation: "HugeDick",
+            admin: false,
+            activated: true,
+            activated_at: Time.zone.now)
+
+User.create!(name: "Dasha with dick",
+            email: "Dash@pretty.nice",
             password: "HugeDick",
             password_confirmation: "HugeDick",
             admin: false,

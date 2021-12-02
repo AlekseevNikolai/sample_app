@@ -13,6 +13,7 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
   before_create :create_activation_digest
+  before_create :set_default_avatar
   validates :name, presence: true, length: {maximum: 50}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},
@@ -20,6 +21,7 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, length: {minimum: 6}, allow_blank: true
+  mount_uploader :avatar, AvatarUploader
 
   # Возвращает дайджест для указанной строки.
   def User.digest(string)
@@ -87,8 +89,8 @@ class User < ApplicationRecord
   #   Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   # end
   def feed
-    # following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
-    Cock.where(user_id: id).order(created_at: :desc)
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    Cock.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
  # Выполняет подписку на сообщения пользователя.
@@ -105,6 +107,13 @@ class User < ApplicationRecord
   #другого пользователя.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  #Устанавливает стандартный аватар пользователя
+  def set_default_avatar
+    File.open("/home/kolya/Documents/Ruby/Tutorial/sample_app/public/uploads/user/default.jpg") do |f|
+      self.avatar = f
+    end
   end
 
   private

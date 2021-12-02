@@ -1,5 +1,6 @@
 class Cock < ApplicationRecord
   belongs_to :user
+  default_scope -> { order(created_at: :desc) }
 
   def emoji
     if self.size.to_i >= 25

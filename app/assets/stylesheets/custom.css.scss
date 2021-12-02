@@ -108,6 +108,7 @@ footer {
 aside {
   section.user_info {
     margin-top: 20px;
+    height: 150px;
   }
   section {
     padding: 10px 0;
@@ -259,13 +260,13 @@ input {
 .timestamp {
   color: $gray-light;
   display: block;
-  margin-left: 60px;
+  margin-left: 0px;
 }
 .gravatar {
-  height: 65px;
+  height: 75px;
   float: left;
   margin-right: 10px;
-  margin-top: 5px;
+  // margin-top: 5px;
 }
 
 aside {
@@ -280,4 +281,10 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+.micro_avatar {
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
 }

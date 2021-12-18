@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_172435) do
+ActiveRecord::Schema.define(version: 2021_12_16_102630) do
 
   create_table "cocks", force: :cascade do |t|
     t.string "size"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 2021_12_02_172435) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_cocks_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_cocks_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
   end
 
   create_table "microposts", force: :cascade do |t|

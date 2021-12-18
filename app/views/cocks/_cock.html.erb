@@ -1,14 +1,17 @@
 <li>
+  <div class="row"> 
     <div class="gravatar">
-        <%= image_tag(cock.user.avatar.url, class: 'micro_avatar') if cock.user.avatar?  %>
-    </div>  
+      <%= image_tag(cock.user.avatar.url, class: 'micro_avatar') if cock.user.avatar?  %>
+    </div>      
     <span class="user"><%= link_to cock.user.name, cock.user %></span>
     <span class="content">
-        <%= "My cock size #{cock.size} #{cock.emoji}" %>
-    <span class="timestamp">
-        Posted <%= time_ago_in_words(cock.created_at) %> ago.
-        <%# <% if current_user?(cock.user) %>
-            <%# <%= link_to "delete", cock, method: :delete, data: { confirm: "You sure?" } %>
-        <%# <% end %>
+      <%= "My cock size #{cock.size} #{cock.emoji}" %>
     </span>
+
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(cock.created_at) %> ago.
+    </span>
+    <span><%= render partial: 'cocks/like_form', locals: {cock: cock} %></span>
+  </div>
+    
 </li>

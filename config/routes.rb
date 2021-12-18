@@ -18,7 +18,10 @@
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :microposts, only: [:create, :destroy]
-  resources :cocks
+  resources :cocks do
+    resources :likes, only: [:create, :destroy]
+  end
   resources :relationships, only: [:create, :destroy]
+  # resources :likes, only: [:create, :destroy]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

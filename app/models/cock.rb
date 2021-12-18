@@ -1,5 +1,6 @@
 class Cock < ApplicationRecord
   belongs_to :user
+  has_many :likes, foreign_key: "post_id", dependent: :destroy
   default_scope -> { order(created_at: :desc) }
 
   def emoji

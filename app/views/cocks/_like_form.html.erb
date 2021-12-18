@@ -1,0 +1,15 @@
+<div >
+    <% if @like = current_user.likes.find_by(post_id: cock.id) %>
+      <%= link_to "Unlike", cock_like_path(cock, @like), method: :delete %>
+    <% else %>
+      <%= link_to "Like", cock_likes_path(cock), method: :post %>
+    <% end %>
+    <% if cock.likes.any? %>
+      <%= cock.likes.count %>
+        <% cock.likes.each do |like| %>
+          <span>
+            <%= image_tag(User.find(like[:user_id]).avatar.url, class: 'like_avatar')%> 
+          </span>
+        <% end %>
+    <% end %>
+</div>

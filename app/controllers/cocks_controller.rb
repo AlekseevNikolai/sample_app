@@ -12,6 +12,11 @@ class CocksController < ApplicationController
     redirect_to root_url
   end
 
+  private
+  def user_has_cocks?
+    current_user.cocks.any?
+  end
+
   def time_period
     if current_user.cocks.first.created_at > 2.minutes.ago
       time_ago = time_ago_in_words(current_user.cocks.first.created_at)
@@ -19,10 +24,4 @@ class CocksController < ApplicationController
       redirect_to root_url
     end
   end
-
-  private
-  def user_has_cocks?
-    current_user.cocks.any?
-  end
-
 end
